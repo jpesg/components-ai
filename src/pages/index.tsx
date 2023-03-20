@@ -1,11 +1,14 @@
 import { Blobs } from '@/components/blobs'
 import { Prompt } from '@/components/prompt'
 import Head from 'next/head'
+import {useConversationStore} from '@/stores/conversation';
 //import { Inter } from 'next/font/google'
 
 //const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const response = useConversationStore(state => state.response)
+
   return (
     <>
       <Head>

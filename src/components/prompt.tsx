@@ -1,9 +1,10 @@
-import {get} from '@/modules/request'
 import React, {useEffect, useRef, useState} from 'react'
+import {useConversationStore} from '@/stores/conversation';
 
 export const Prompt = () => {
     const [prompt, setPrompt] = useState<string>('')
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
+    const generate = useConversationStore(state => state.generateComponent)
     useEffect(() => {
         textAreaRef.current?.focus()
     }, [])
@@ -13,15 +14,7 @@ export const Prompt = () => {
 
         console.log('############')
         try {
-            /*const response = await fetch(`/api/generate?prompt=${prompt}`, {
-                 method: 'GET',
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             })*/
-            const url = `/api/generate?prompt=${prompt}`
-            const response = await get<undefined, string>(url)
-            console.log({response})
+            await generate(prompt)
         } catch (e) {
             console.log({e}, '~~~~~~~~~~~~~~~~')
         }
