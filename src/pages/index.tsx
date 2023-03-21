@@ -8,8 +8,8 @@ import {Preview} from '@/components/preview';
 //const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const content = useConversationStore(state => state.content)
- console.log({content})
+
+
   return (
     <>
       <Head>
@@ -26,7 +26,7 @@ export default function Home() {
         <div className="flex h-full w-full items-center">             
           <div className='w-full'>
             <Prompt/>
-              <Preview content={''} template={'react'}/>
+              <Preview/>
           </div>
         </div>
       </main>

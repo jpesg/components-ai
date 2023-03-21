@@ -16,16 +16,26 @@ export default async function handler(
         return res.status(405).end()
     }
 
-    const {prompt} = req.query as { prompt: string, language: string, framework: string }
+    const {prompt, language, framework} = req.query as { prompt: string, language: string, framework: string }
+    let promptToSend = prompt
+
+    if (framework !== 'vanilla') {
+        promptToSend = `${prompt}. Para ${framework}.`
+    }
+
+    if (language !== 'javascript') {
+        promptToSend = `${prompt}. Con ${language}.`
+    }
 
     const response = await post<OpenaiRequest, ResponseOpenAi>(API_URL, {
         model: 'gpt-3.5-turbo',
-        messages: messageCreator(prompt),
+        messages: messageCreator(promptToSend),
         stream: false,
         stop: ['\ninfo:']
     }, {Authorization: `Bearer ${OPENAI_API_KEY}`})
 
     const {content} = response.choices[0].message
+    console.log({content})
     return res.json({data: content})
 
 

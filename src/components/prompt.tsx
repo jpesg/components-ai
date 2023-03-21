@@ -12,7 +12,7 @@ export const Prompt = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        console.log('############')
+        console.log('############', prompt)
         try {
             await generate(prompt)
         } catch (e) {

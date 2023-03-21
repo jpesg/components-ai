@@ -1,19 +1,31 @@
-import { amethyst } from '@codesandbox/sandpack-themes';
+import {amethyst} from '@codesandbox/sandpack-themes';
 import {Sandpack, SandpackPredefinedTemplate, SandpackFiles} from '@codesandbox/sandpack-react';
+import {useConversationStore} from '@/stores/conversation';
 
-import {FC} from 'react'; 
-
-export const Preview: FC<{ content: string, template: SandpackPredefinedTemplate }> = ({content, template}) => {
+const generatePlaygroundCode = ({framework, code}: { framework: string, code: string }) => {
+    if (framework === 'vanilla') {
+        return `document.getElementById("app").innerHTML=\`${code.trim()}\``
+    }
+    return code
+}
+export const Preview = () => {
+    const {code, template, framework} = useConversationStore(state => state)
+    if (!code) {
+        return (<h1>no code</h1>)
+    }
+    const playgroundCode = generatePlaygroundCode({code, framework})
+    console.log({playgroundCode})
     const files: SandpackFiles = {
-        '/App.js': {
-            code:  `export default function App() {
-                return (<h1>Hello Sandpack</h1>)
-                }`
+        '/index.js': {
+            code: playgroundCode
         }
     }
     return (<Sandpack
+        options={{
+            wrapContent: true
+        }}
         theme={amethyst}
-        template={template}
+        template={framework}
         files={files}
     />)
 }
