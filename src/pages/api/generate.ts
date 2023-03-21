@@ -22,7 +22,7 @@ export default async function handler(
         model: 'gpt-3.5-turbo',
         messages: messageCreator(prompt),
         stream: false,
-
+        stop: ['\ninfo:']
     }, {Authorization: `Bearer ${OPENAI_API_KEY}`})
 
     const {content} = response.choices[0].message

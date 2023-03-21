@@ -33,14 +33,12 @@ export const messageCreator = (prompt: string): Array<Message> => {
     const defaultMessages: Array<Message> = [
         {
             role: 'system',
-            content:
-                'Asume que eres developer y estás generando código para ser usado en producción. Sólo genera el código sin explicaciones. Por defecto, usa HTML y CSS si no se te indica lo contrario.'
+            content: 'Asume que eres developer y estás generando código para ser usado en producción. Sólo genera el código sin explicaciones. Por defecto, usa HTML y CSS si no se te indica lo contrario.'
         },
         {role: 'user', content: 'Crea un botón azul.'},
         {
             role: 'assistant',
-            content:
-                '<button style="background: blue; color: white;">Button</button>\ninfo:Botón con sólo HTML.'
+            content: '<button style="background: blue; color: white;">Button</button>\ninfo:Botón con sólo HTML.'
         },
         {
             role: 'user',
