@@ -1,18 +1,18 @@
 import {create} from 'zustand'
 import {get} from '@/modules/request';
 interface Store {
-    response: null | string
+    content: null | string
     isReplying: boolean
     generateComponent: (prompt: string) => Promise<void>
 }
 export const useConversationStore = create<Store>(set => ({
-    response: null,
+    content: null,
     isReplying: false,
     generateComponent: async (prompt) => {
         set({isReplying: true})
         const url = `/api/generate?prompt=${prompt}`
-        const {message} = await get<undefined, {message: string}>(url)
-        set({response: message, isReplying: false})
+        const {data} = await get<undefined, {data: string}>(url)
+        set({content: data, isReplying: false})
     }
 
 

@@ -7,7 +7,7 @@ import {useConversationStore} from '@/stores/conversation';
 //const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const response = useConversationStore(state => state.response)
+  const content = useConversationStore(state => state.content)
 
   return (
     <>

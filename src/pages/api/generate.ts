@@ -5,9 +5,7 @@ import type {NextApiRequest, NextApiResponse} from 'next'
 const {OPENAI_API_KEY} = process.env
 const API_URL = 'https://api.openai.com/v1/chat/completions'
 
-type Response = {
-    name: string
-} | { message: string }
+type Response = { data: string }
 
 
 export default async function handler(
@@ -19,21 +17,17 @@ export default async function handler(
     }
 
     const {prompt} = req.query as { prompt: string, language: string, framework: string }
-    //zod + trpc
 
-    try {
-        const response = await post<OpenaiRequest, ResponseOpenAi>(API_URL, {
-            model: 'gpt-3.5-turbo',
-            messages: messageCreator(prompt),
-            stream: false,
+    const response = await post<OpenaiRequest, ResponseOpenAi>(API_URL, {
+        model: 'gpt-3.5-turbo',
+        messages: messageCreator(prompt),
+        stream: false,
 
-        }, {Authorization: `Bearer ${OPENAI_API_KEY}`})
+    }, {Authorization: `Bearer ${OPENAI_API_KEY}`})
 
-        const message = response.choices[0].message
-        return res.json({message: message.content})
-    } catch (e) {
-        console.log({e}, '~~~~~~~~~~~~~~~~~~~~~~')
-    }
+    const {content} = response.choices[0].message
+    return res.json({data: content})
+
 
     /*
 
@@ -61,5 +55,5 @@ export default async function handler(
       console.log(JSON.stringify(_data))
       */
 
-    res.status(200).json({name: 'John Doe'})
+
 }
