@@ -1,14 +1,21 @@
-import { Fragment } from 'react'
+import {Fragment, ReactElement} from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectIcon } from './icons'
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
-
-export function Select({ disabled, list, label, value, update, selected }) {
+export type Element = {name: string, icon: ReactElement, value: string}
+type Props = {
+    disabled: boolean
+    list: Array<Element>
+    label: string    
+    update: (value: Element) => void
+    selected: Element
+}
+export function Select({ disabled, list, label, update, selected }: Props) {
     return (
-        <Listbox disabled={disabled} value={value} onChange={update}>
+        <Listbox disabled={disabled} value={selected} onChange={update}>
             {({ open }) => (
                 <div className={`${disabled ? 'opacity-50' : ''} flex items-center justify-center gap-x-2`}>
                     <Listbox.Label className='block text-sm font-medium text-white'>{label}</Listbox.Label>
@@ -42,7 +49,7 @@ export function Select({ disabled, list, label, value, update, selected }) {
                                                 active ? 'bg-purple-900 text-white' : 'text-white',
                                                 'relative cursor-default select-none py-2 pl-3 pr-9'
                                             )}
-                                        value={option.value}
+                                        value={option}
                                     >
                                         {({ selected, active }) => (
                                             <>
