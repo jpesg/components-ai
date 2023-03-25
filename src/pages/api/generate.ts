@@ -1,7 +1,7 @@
-import {ResponseOpenAi, OpenaiRequest, messageCreator} from '@/domain/openai'
-import {post} from '@/modules/request'
+import {messageCreator} from '@/domain/openai'
+//import {post} from '@/modules/request'
 import type {NextApiRequest, NextApiResponse} from 'next'
-import {type} from 'os';
+
 
 const {OPENAI_API_KEY} = process.env
 const API_URL = 'https://api.openai.com/v1/chat/completions'
@@ -95,7 +95,7 @@ export default async function handler(
 
             try {
                 const json = JSON.parse(data)
-                const {content} = json.choices?.[0]?.delta
+                const content = json?.choices?.[0]?.delta?.content
                 content && res.write(`data: ${JSON.stringify(content)}\n\n`)
                 // res.write(`data: ${JSON.stringify({ content })}\n\n`)
             } catch (error) {

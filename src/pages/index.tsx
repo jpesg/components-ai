@@ -1,7 +1,6 @@
 import {Blob} from '@/components/blobs'
 import { Prompt } from '@/components/prompt'
 import Head from 'next/head'
-
 import {Preview} from '@/components/preview';
 import { SelectFramework } from '@/components/select.framework';
 import {SelectLanguages} from '@/components/select.language';
