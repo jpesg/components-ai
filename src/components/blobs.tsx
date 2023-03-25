@@ -9,7 +9,7 @@ export const Blob: FC<{className: string}> = ({className}) => {
 
 export const Blobs = () => {
     return (
-        <div className='abosulute'>
+        <div className='relative'>
             <Blob className="bg-purple-600 -top-32 -left-32"/>
             <Blob className="bg-purple-600 top-full right-32"/>
             <Blob className="bg-purple-600 bottom-0 right-full -ml-24"/>

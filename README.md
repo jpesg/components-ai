@@ -1,11 +1,7 @@
-## Getting Started
-
-First, run the development server:
+## Generate components using openAI
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
 ```
+
+
