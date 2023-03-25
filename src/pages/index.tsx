@@ -5,6 +5,7 @@ import {useConversationStore} from '@/stores/conversation';
 
 import {Preview} from '@/components/preview';
 import { SelectFramework } from '@/components/select.framework';
+import {SelectLanguages} from '@/components/select.language';
 //import { Inter } from 'next/font/google'
 
 //const inter = Inter({ subsets: ['latin'] })
@@ -28,7 +29,7 @@ export default function Home() {
           </h1>
         
         <SelectFramework/>
-        
+        <SelectLanguages/>
         <div className="flex h-full w-full items-center">             
           <div className='w-full'>
             <Prompt/>
